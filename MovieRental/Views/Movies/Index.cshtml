@@ -14,11 +14,19 @@
         @Html.ActionLink("Create New", "Create")
     </p>
     }
-
+    @using (Html.BeginForm())
+    {
+        <p>
+            Find by title: @Html.TextBox("title")
+            director: @Html.TextBox("director")
+            max price: @Html.TextBox("price",100,new { type="number", min="0", max="100" }) 
+            <input type="submit" value="Search" />
+        </p>
+    }
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Genre.Name)
+                @Html.DisplayNameFor(model => model.Genre)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Title)

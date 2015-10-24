@@ -15,18 +15,30 @@ namespace MovieRental.Controllers
     {
         private MovieDBContext db = new MovieDBContext();
 
-        public ActionResult Index(int? genre)
+        public ActionResult Index(int? genre,string title,string director,int? price)
         {
-            if (genre == null)
+            var movies = db.Movies.Include(m => m.Genre);
+
+            if (genre != null)
             {
-                var movies = db.Movies.Include(m => m.Genre);
-                return View(movies.ToList());
+                movies = movies.Where(m => m.GenreId == genre);
             }
-            else
+            if (!String.IsNullOrEmpty(title))
             {
-                var movies = db.Movies.Where(m => m.GenreId == genre);
-                return View(movies.ToList());
+                movies = movies.Where(m => m.Title.Contains(title));
             }
+            if (!String.IsNullOrEmpty(director))
+            {
+                movies = movies.Where(m => m.Director.Contains(director));
+            }
+            if (price != null)
+            {
+                movies = movies.Where(m => m.Price <= price);
+            }
+            //var genres = from g in db.Genres select g;
+            //ViewBag.GenreList = new SelectList(genres, "GenreId", "Name");
+
+            return View(movies.ToList());
         }
 
         // GET: Movies/Details/5

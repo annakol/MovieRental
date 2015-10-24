@@ -13,9 +13,7 @@ namespace MovieRental.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            //ViewBag.Genres = db.Genres.ToList();
-            return View(db.Genres.ToList());
-            //return View();
+            return View();
         }
 
         
