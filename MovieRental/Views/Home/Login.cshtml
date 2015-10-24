@@ -1,0 +1,48 @@
+﻿@model MovieRental.Models.User
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Login</h2>
+
+<div id="LoginForm">
+
+    @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <table class="tableForm">
+            <tr>
+                <td>@Html.LabelFor(model => model.Username, new { @class = "control-label col-md-2" })</td>
+                <td>@Html.TextBoxFor(model => model.Username, new { @class = "TextBox" })</td>
+                <td class="validate">@Html.ValidationMessageFor(model => model.Username)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.Password, new { @class = "control-label col-md-2" })</td>
+                <td>@Html.PasswordFor(model => model.Password, new { @class = "TextBox" })</td>
+                <td class="validate">@Html.ValidationMessageFor(model => model.Password)</td>
+            </tr>
+        </table>
+
+
+        if (ViewBag.Message != null)
+        {
+            <div class="message">
+                @ViewBag.Message
+            </div>
+        }
+
+        <div class="SubmitBtnDiv">
+            <input type="submit" value="Login" class="btn btn-default" id="SubmitBtn" />
+        </div>
+    }
+    <br />
+    <div class="Back">
+        <a>
+            @Html.ActionLink("Back to Site", "Index")
+        </a>
+    </div>
+</div> 

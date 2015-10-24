@@ -16,9 +16,9 @@
     </div>
     <br />
     <br />
-    <div style="left: 0px; position: relative">
+    <div style="left: 70px; position: relative">
         <ul class="nav nav-pills">
-            <li class="active"><a href="\">Home</a></li>
+            <li>@Html.ActionLink("Home", "Index", "Home", null, null)</li>
             <li role="presentation" class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                     Genres <span class="caret"></span>
@@ -27,8 +27,24 @@
                     @{Html.RenderAction("GenreMenu", "Home");}
                 </ul>
             </li>
-            <li><a href="#">Login</a></li>
-            <li><a href="\Users\Create">Sign up</a></li>
+            @if (Session["LogedUserId"] == null)
+            {
+                <li>@Html.ActionLink("Login", "Login", "Home", null, null)</li>
+                <li>@Html.ActionLink("Sign up", "Create", "Users", null, null)</li>
+            }
+            else if (Session["IsManegerLoged"] == true.ToString())
+            {
+
+                <li>@Html.ActionLink("My Profile", "Details", "Users", new { id = Session["LogedUserId"] }, null)</li>
+                <li>@Html.ActionLink("Users", "Index", "Users", null, null)</li>
+                <li>@Html.ActionLink("Movies", "Index", "Movies", null, null)</li>
+                <li><a href="#">Borrows</a></li>
+            }
+            else
+            {
+                <li><a href="#">My Orders</a></li>
+                <li><a href="#">Search</a></li>
+            }
             <li><a href="#">About us</a></li>
         </ul>
     </div>
