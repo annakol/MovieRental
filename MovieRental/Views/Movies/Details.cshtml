@@ -65,7 +65,13 @@
             </dt>
     
             <dd>
+                @if (Model.TrailerUrl == null)
+                {
+                    <div>No trailer available</div>
+                }
+                else { 
                 <a href="@Url.Content(Model.TrailerUrl)" target=" _blank"> Watch </a>
+                }
             </dd>
     
             <dt>
@@ -73,7 +79,15 @@
             </dt>
     
             <dd>
-                <img src="@Url.Content(Model.ArtUrl)" width="100" height="100" />
+                @if (Model.ArtUrl == null || !File.Exists(Server.MapPath(Model.ArtUrl)))
+                {
+                    <div>No art available</div>
+                }
+                else
+                {
+                    <img src="@Url.Content(Model.ArtUrl)" width="100" height="100" />
+                }
+
             </dd>
     
         </dl>

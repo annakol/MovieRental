@@ -8,9 +8,12 @@
     <title>Index</title>
 </head>
 <body>
+    @if (Session["IsManager"] == true.ToString())
+    {
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
+    }
 
     <table class="table">
         <tr>
@@ -50,9 +53,15 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.MovieId }) |
-                @Html.ActionLink("Details", "Details", new { id=item.MovieId }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.MovieId })
+                @if (Session["IsManager"] == true.ToString())
+                {
+                    <span>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.MovieId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.MovieId }) |
+                    </span>
+                }
+                @Html.ActionLink("Details", "Details", new { id=item.MovieId }) 
+
             </td>
         </tr>
     }

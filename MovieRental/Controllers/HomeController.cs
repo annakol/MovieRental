@@ -46,7 +46,7 @@ namespace MovieRental.Controllers
 
                     Session["LogedUserId"] = v.ID.ToString();
                     Session["LogedUserName"] = v.Username;
-                    Session["IsManegerLoged"] = v.IsManager.ToString();
+                    Session["IsManager"] = v.IsManager.ToString();
                     return RedirectToAction("Index");
                 }
                 ViewBag.Message = "Wrong Username or Password";

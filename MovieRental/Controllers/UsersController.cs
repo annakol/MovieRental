@@ -17,12 +17,20 @@ namespace MovieRental.Controllers
         // GET: /Users/
         public ActionResult Index()
         {
+            if (!(Session["IsManager"] != null && Session["IsManager"].ToString().Equals(true.ToString())))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View(db.Users.ToList());
         }
 
         // GET: /Users/Details/5
         public ActionResult Details(int? id)
         {
+            if (!(Session["IsManager"] != null && Session["IsManager"].ToString().Equals(true.ToString())))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -38,6 +46,10 @@ namespace MovieRental.Controllers
         // GET: /Users/Create
         public ActionResult Create()
         {
+            if (!(Session["IsManager"] != null && Session["IsManager"].ToString().Equals(true.ToString())))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
@@ -61,6 +73,10 @@ namespace MovieRental.Controllers
         // GET: /Users/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (!(Session["IsManager"] != null && Session["IsManager"].ToString().Equals(true.ToString())))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -92,6 +108,10 @@ namespace MovieRental.Controllers
         // GET: /Users/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (!(Session["IsManager"] != null && Session["IsManager"].ToString().Equals(true.ToString())))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

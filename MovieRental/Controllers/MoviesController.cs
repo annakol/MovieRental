@@ -47,6 +47,10 @@ namespace MovieRental.Controllers
         // GET: Movies/Create
         public ActionResult Create()
         {
+            if (!(Session["IsManager"] != null && Session["IsManager"].ToString().Equals(true.ToString())))
+            {
+                return RedirectToAction("Index");
+            }
             ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name");
             return View();
         }
@@ -58,7 +62,7 @@ namespace MovieRental.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "MovieId,Title,Description,GenreId,ReleaseDate,Director,Price,TrailerUrl,ArtUrl,ArtImage")] Movie movie)
         {
-            if (movie.ArtImage.ContentLength > 0)
+            if (movie.ArtImage != null && movie.ArtImage.ContentLength > 0)
             {
                 var fileName = Path.GetFileName(movie.ArtImage.FileName);
                 var path = Path.Combine(Server.MapPath("/uploads"), fileName);
@@ -80,6 +84,10 @@ namespace MovieRental.Controllers
         // GET: Movies/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (!(Session["IsManager"] != null && Session["IsManager"].ToString().Equals(true.ToString())))
+            {
+                return RedirectToAction("Index");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -100,7 +108,7 @@ namespace MovieRental.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "MovieId,Title,Description,GenreId,ReleaseDate,Director,Price,TrailerUrl,ArtUrl,ArtImage")] Movie movie)
         {
-            if (movie.ArtImage.ContentLength > 0)
+            if (movie.ArtImage != null && movie.ArtImage.ContentLength > 0)
             {
                 var fileName = Path.GetFileName(movie.ArtImage.FileName);
                 var path = Path.Combine(Server.MapPath("/uploads"), fileName);
@@ -121,6 +129,10 @@ namespace MovieRental.Controllers
         // GET: Movies/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (!(Session["IsManager"] != null && Session["IsManager"].ToString().Equals(true.ToString())))
+            {
+                return RedirectToAction("Index");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
