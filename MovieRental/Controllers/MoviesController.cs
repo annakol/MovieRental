@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MovieRental.Models;
+using System.IO;
 
 namespace MovieRental.Controllers
 {
@@ -14,10 +15,18 @@ namespace MovieRental.Controllers
     {
         private MovieDBContext db = new MovieDBContext();
 
-        // GET: Movies
-        public ActionResult Index()
+        public ActionResult Index(int? genre)
         {
-            return View(db.Movies.ToList());
+            if (genre == null)
+            {
+                var movies = db.Movies.Include(m => m.Genre);
+                return View(movies.ToList());
+            }
+            else
+            {
+                var movies = db.Movies.Where(m => m.GenreId == genre);
+                return View(movies.ToList());
+            }
         }
 
         // GET: Movies/Details/5
@@ -38,6 +47,7 @@ namespace MovieRental.Controllers
         // GET: Movies/Create
         public ActionResult Create()
         {
+            ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name");
             return View();
         }
 
@@ -46,8 +56,16 @@ namespace MovieRental.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Title,ReleaseDate,Genre,Price")] Movie movie)
+        public ActionResult Create([Bind(Include = "MovieId,Title,Description,GenreId,ReleaseDate,Director,Price,TrailerUrl,ArtUrl,ArtImage")] Movie movie)
         {
+            if (movie.ArtImage.ContentLength > 0)
+            {
+                var fileName = Path.GetFileName(movie.ArtImage.FileName);
+                var path = Path.Combine(Server.MapPath("/uploads"), fileName);
+                movie.ArtImage.SaveAs(path);
+                movie.ArtUrl = "/uploads/" + fileName;
+            }
+
             if (ModelState.IsValid)
             {
                 db.Movies.Add(movie);
@@ -55,6 +73,7 @@ namespace MovieRental.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name", movie.GenreId);
             return View(movie);
         }
 
@@ -70,6 +89,7 @@ namespace MovieRental.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name", movie.GenreId);
             return View(movie);
         }
 
@@ -78,14 +98,23 @@ namespace MovieRental.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Title,ReleaseDate,Genre,Price")] Movie movie)
+        public ActionResult Edit([Bind(Include = "MovieId,Title,Description,GenreId,ReleaseDate,Director,Price,TrailerUrl,ArtUrl,ArtImage")] Movie movie)
         {
+            if (movie.ArtImage.ContentLength > 0)
+            {
+                var fileName = Path.GetFileName(movie.ArtImage.FileName);
+                var path = Path.Combine(Server.MapPath("/uploads"), fileName);
+                movie.ArtImage.SaveAs(path);
+                movie.ArtUrl = "/uploads/" + fileName;
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(movie).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name", movie.GenreId);
             return View(movie);
         }
 

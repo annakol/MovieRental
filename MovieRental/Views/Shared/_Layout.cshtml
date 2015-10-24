@@ -3,30 +3,14 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Rent A Movie</title>
+    <title>Rent A Movie</title>
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
 <body>
-    @*
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                </ul>
-            </div>
-        </div>
-    </div>
-    *@
     <div style="float: left;  left:70px; position:relative">
         <img src="/Resources/logo.jpg" />
     </div>
@@ -34,7 +18,15 @@
     <br />
     <div style="left: 0px; position: relative">
         <ul class="nav nav-pills">
-            <li class="active"><a href="#">Home</a></li>
+            <li class="active"><a href="\">Home</a></li>
+            <li role="presentation" class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                    Genres <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    @{Html.RenderAction("GenreMenu", "Home");}
+                </ul>
+            </li>
             <li><a href="#">Login</a></li>
             <li><a href="\Users\Create">Sign up</a></li>
             <li><a href="#">About us</a></li>
@@ -44,11 +36,8 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Rent A Movie</p>
+            <p>&copy; @DateTime.Now.Year - Noy Levy & Anna Kolesnikov</p>
         </footer>
     </div>
-
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
 </body>
 </html>

@@ -1,16 +1,42 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MovieRental.Models
 {
     public class Movie
     {
-        public int ID { get; set; }
+        public int MovieId { get; set; }
+
+        [Required]
+        [StringLength(120, MinimumLength = 2)]
         public string Title { get; set; }
+
+        public string Description { get; set; }
+
+        public int GenreId { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime ReleaseDate { get; set; }
-        public string Genre { get; set; }
+
+        public string Director { get; set; }
+
+        [Range(0.01, 100.00)]
+        [DataType(DataType.Currency)]
         public decimal Price { get; set; }
+
+        public string TrailerUrl { get; set; }
+
+        [DataType(DataType.ImageUrl)]
+        [StringLength(1024)]
+        public string ArtUrl { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase ArtImage { get; set; }
+        public virtual Genre Genre { get; set; }
     }
 }

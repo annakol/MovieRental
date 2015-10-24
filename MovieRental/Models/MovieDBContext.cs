@@ -6,14 +6,13 @@ namespace MovieRental.Models
     {
         public DbSet<Movie> Movies { get; set; }
         public DbSet<User> Users { get; set; }
-
+        public DbSet<Genre> Genres { get; set; }
 
         public MovieDBContext()
-            : base("DefaultConnection")
+            : base("Anna")
         {
+            //Database.SetInitializer<MovieDBContext>(new DropCreateDatabaseAlways<MovieDBContext>());
             Database.SetInitializer<MovieDBContext>(null);
         }
-
-        //public System.Data.Entity.DbSet<MovieRental.Models.User> Users { get; set; }
     }
 }

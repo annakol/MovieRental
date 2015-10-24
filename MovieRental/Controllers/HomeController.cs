@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MovieRental.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,10 +9,21 @@ namespace MovieRental.Controllers
 {
     public class HomeController : Controller
     {
+        private MovieDBContext db = new MovieDBContext();
         // GET: Home
         public ActionResult Index()
         {
-            return View();
+            //ViewBag.Genres = db.Genres.ToList();
+            return View(db.Genres.ToList());
+            //return View();
+        }
+
+        
+        public ActionResult GenreMenu()
+        {
+            var genres = db.Genres.ToList();
+
+            return PartialView(genres);
         }
     }
 }

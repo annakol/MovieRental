@@ -1,0 +1,11 @@
+﻿@model IEnumerable<MovieRental.Models.Genre>
+
+    <li>@Html.ActionLink("All","Index", "Movies")</li>
+@foreach (var genre in Model)
+{
+    <li>
+        @Html.ActionLink(genre.Name,
+             "Index", "Movies",
+            new { Genre = genre.GenreId }, null)
+    </li>
+}
