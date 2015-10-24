@@ -47,7 +47,7 @@ namespace MovieRental.Controllers
         // GET: Movies/Create
         public ActionResult Create()
         {
-            if (!(Session["IsManager"] != null && Session["IsManager"].ToString().Equals(true.ToString())))
+            if (!(Session["IsManagerLogged"] != null && Session["IsManagerLogged"].ToString().Equals(true.ToString())))
             {
                 return RedirectToAction("Index");
             }
@@ -84,7 +84,7 @@ namespace MovieRental.Controllers
         // GET: Movies/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (!(Session["IsManager"] != null && Session["IsManager"].ToString().Equals(true.ToString())))
+            if (!(Session["IsManagerLogged"] != null && Session["IsManagerLogged"].ToString().Equals(true.ToString())))
             {
                 return RedirectToAction("Index");
             }
@@ -129,7 +129,7 @@ namespace MovieRental.Controllers
         // GET: Movies/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (!(Session["IsManager"] != null && Session["IsManager"].ToString().Equals(true.ToString())))
+            if (!(Session["IsManagerLogged"] != null && Session["IsManagerLogged"].ToString().Equals(true.ToString())))
             {
                 return RedirectToAction("Index");
             }

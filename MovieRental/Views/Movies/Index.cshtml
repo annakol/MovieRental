@@ -8,7 +8,7 @@
     <title>Index</title>
 </head>
 <body>
-    @if (Session["IsManager"] == true.ToString())
+    @if (Session["IsManagerLogged"] == true.ToString())
     {
     <p>
         @Html.ActionLink("Create New", "Create")
@@ -53,7 +53,7 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                @if (Session["IsManager"] == true.ToString())
+                @if (Session["IsManagerLogged"] == true.ToString())
                 {
                     <span>
                         @Html.ActionLink("Edit", "Edit", new { id = item.MovieId }) |
