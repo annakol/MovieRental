@@ -69,7 +69,8 @@
                     </span>
                 }
                 @Html.ActionLink("Details", "Details", new { id=item.MovieId }) 
-
+                @Html.ActionLink("Order", "Create", "Orders", new { id = item.MovieId },null)
+                
             </td>
         </tr>
     }

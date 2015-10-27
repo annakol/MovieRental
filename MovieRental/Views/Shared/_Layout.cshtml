@@ -27,22 +27,21 @@
                     @{Html.RenderAction("GenreMenu", "Home");}
                 </ul>
             </li>
-            @if (Session["LogedUserId"] == null)
+            @if (Session["LoggedUserId"] == null)
             {
                 <li>@Html.ActionLink("Login", "Login", "Home", null, null)</li>
                 <li>@Html.ActionLink("Sign up", "Create", "Users", null, null)</li>
             }
-            else if (Session["IsManagerLogged"] == true.ToString())
-            {
-
-                <li>@Html.ActionLink("My Profile", "Details", "Users", new { id = Session["LogedUserId"] }, null)</li>
-                <li>@Html.ActionLink("Users", "Index", "Users", null, null)</li>
-                <li><a href="#">Borrows</a></li>
-            }
             else
             {
-                <li><a href="#">My Orders</a></li>
-                <li><a href="#">Search</a></li>
+                if (Session["IsManagerLogged"] == true.ToString())
+                {
+                    <li>@Html.ActionLink("Users", "Index", "Users", null, null)</li>
+                    <li>@Html.ActionLink("Orders", "Index", "Orders", null, null)</li>
+                }
+                <li>@Html.ActionLink("My Profile", "Details", "Users", new { id = Session["LoggedUserId"] }, null)</li>
+                <li>@Html.ActionLink("My Orders", "Details", "Orders", null, null)</li>
+                <li>@Html.ActionLink("Log-out", "LogOut", "Home", null, null)</li>
             }
             <li><a href="#">About us</a></li>
         </ul>

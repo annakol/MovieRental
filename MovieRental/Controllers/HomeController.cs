@@ -42,14 +42,22 @@ namespace MovieRental.Controllers
                 {
                     ViewBag.Message = null;
 
-                    Session["LogedUserId"] = v.ID.ToString();
-                    Session["LogedUserName"] = v.Username;
+                    Session["LoggedUserId"] = v.ID.ToString();
+                    Session["LoggedUserName"] = v.Username;
                     Session["IsManagerLogged"] = v.IsManager.ToString();
                     return RedirectToAction("Index");
                 }
                 ViewBag.Message = "Wrong Username or Password";
             }
             return View(user);
+        }
+
+        public ActionResult LogOut()
+        {
+            Session["LoggedUserId"] = null;
+            Session["LoggedUserName"] = null;
+            Session["IsManagerLogged"] = null;
+            return RedirectToAction("Index");
         }
     }
 }

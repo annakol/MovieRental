@@ -27,11 +27,12 @@ namespace MovieRental.Controllers
         // GET: /Users/Details/5
         public ActionResult Details(int? id)
         {
-            if (!(Session["IsManagerLogged"] != null && Session["IsManagerLogged"].ToString().Equals(true.ToString())))
+            if (Session["LoggedUserId"] == null)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login", "Home");
             }
-            if (id == null)
+            int userId = Int32.Parse(Session["LoggedUserId"].ToString());
+            if (id == null || id != userId)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -46,10 +47,6 @@ namespace MovieRental.Controllers
         // GET: /Users/Create
         public ActionResult Create()
         {
-            if (!(Session["IsManagerLogged"] != null && Session["IsManagerLogged"].ToString().Equals(true.ToString())))
-            {
-                return RedirectToAction("Index", "Home");
-            }
             return View();
         }
 
