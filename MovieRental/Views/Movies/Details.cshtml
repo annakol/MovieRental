@@ -6,6 +6,31 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Details</title>
+    <script type="text/javascript" src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var movie = @Html.Raw(Json.Encode(Model.Title))
+            $.getJSON("http://www.omdbapi.com/?t=" + movie + "&tomatoes=true&type=movie", function (json) {
+                console.log(json);
+                $("#review").html("Movie not found");
+                if (json["Response"] == "True") {
+                    $("#review").html(
+                        "IMDB Rating - " + json["imdbRating"] + "<br>" +
+                        "IMDB Votes - " + json["imdbVotes"] + "<br>" +
+                        "TomatoMeter - " + json["tomatoMeter"] + "%<br>" +
+                        "Tomato Avg Rate - " + json["tomatoRating"] + "/10<br>" +
+                        "Tomato Reviews Count - " + json["tomatoReviews"] + "<br>" +
+                        "Tomato Fresh - " + json["tomatoFresh"] + "<br>" +
+                        "Tomato Rotten - " + json["tomatoRotten"] + "<br>" +
+                        "TomatoUserMeter - " + json["tomatoUserMeter"] + "%<br>" +
+                        "Tomato User Avg Rate - " + json["tomatoUserRating"] + "/5<br>" +
+                        "Tomato User Revies Count - " + json["tomatoUserReviews"] + "<br>" +
+                        "Tomato Desc - " + json["tomatoConsensus"]
+                    );
+                }
+            });
+        });
+    </script>
 </head>
 <body>
     <div>
@@ -63,7 +88,6 @@
             <dt>
                 @Html.DisplayNameFor(model => model.TrailerUrl)
             </dt>
-    
             <dd>
                 @if (Model.TrailerUrl == null)
                 {
@@ -90,6 +114,14 @@
 
             </dd>
     
+            <dt>
+                Review API
+            </dt>
+            <dd>
+                <section id="review">
+
+                </section>
+            </dd>
         </dl>
     </div>
     <p>
