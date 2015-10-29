@@ -11,7 +11,6 @@
         $(document).ready(function () {
             var movie = @Html.Raw(Json.Encode(Model.Title))
             $.getJSON("http://www.omdbapi.com/?t=" + movie + "&tomatoes=true&type=movie", function (json) {
-                console.log(json);
                 $("#review").html("Movie not found");
                 if (json["Response"] == "True") {
                     $("#review").html(
