@@ -20,8 +20,9 @@
                 @Html.DisplayNameFor(model => model.OrderDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CancelDate)
+                @Html.DisplayNameFor(model => model.ReturnDate)
             </th>
+            <th></th>
         </tr>
     
     @foreach (var item in Model) {
@@ -36,8 +37,15 @@
                 @Html.DisplayFor(modelItem => item.OrderDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CancelDate)
+                @Html.DisplayFor(modelItem => item.ReturnDate)
             </td>
+            <td>
+                @if (item.ReturnDate == null)
+                {
+                    @Html.ActionLink("Return", "Delete", new { id = item.OrderId })
+                }
+            </td>
+
         </tr>
     }
     </table>

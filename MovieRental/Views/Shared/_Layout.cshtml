@@ -39,12 +39,15 @@
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
 <body>
-    <div style="float: left;  left:70px; position:relative">
-        <canvas id="logo"></canvas>
-    </div>
+    <header>
+        <div style="float: left;  left:70px; position:relative">
+            <canvas id="logo"></canvas>
+        </div>
+    </header>
     <br />
     <br />
-    <div style="position: relative">
+    <br />
+    <nav>
         <ul class="nav nav-pills">
             <li>@Html.ActionLink("Home", "Index", "Home", null, null)</li>
             <li role="presentation" class="dropdown">
@@ -73,13 +76,16 @@
             }
             <li><a href="#">About us</a></li>
         </ul>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Noy Levy & Anna Kolesnikov</p>
-        </footer>
-    </div>
+    </nav>
+
+    <article>
+        <section id="content" class="container body-content">
+            @RenderBody()
+        </section>
+    </article>
+    <hr />
+    <footer>
+        &copy; @DateTime.Now.Year - Noy Levy & Anna Kolesnikov
+     </footer>
 </body>
 </html>

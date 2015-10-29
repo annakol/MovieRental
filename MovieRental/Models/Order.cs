@@ -16,7 +16,7 @@ namespace MovieRental.Models
 
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
-        public DateTime? CancelDate { get; set; }
+        public DateTime? ReturnDate { get; set; }
 
         public virtual User User { get; set; }
         public virtual Movie Movie { get; set; }
