@@ -58,7 +58,7 @@ namespace MovieRental.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "MovieId,Title,Description,GenreId,ReleaseDate,Director,Price,TrailerUrl,ArtUrl,ArtImage")] Movie movie)
         {
-            if (movie.ArtImage.ContentLength > 0)
+            if (movie.ArtImage != null && movie.ArtImage.ContentLength > 0)
             {
                 var fileName = Path.GetFileName(movie.ArtImage.FileName);
                 var path = Path.Combine(Server.MapPath("/uploads"), fileName);

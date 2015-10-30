@@ -38,6 +38,7 @@
                 <li>@Html.ActionLink("My Profile", "Details", "Users", new { id = Session["LogedUserId"] }, null)</li>
                 <li>@Html.ActionLink("Users", "Index", "Users", null, null)</li>
                 <li>@Html.ActionLink("Movies", "Index", "Movies", null, null)</li>
+                <li>@Html.ActionLink("Addresses", "Index", "Address", null, null)</li>
                 <li><a href="#">Borrows</a></li>
             }
             else
@@ -45,7 +46,7 @@
                 <li><a href="#">My Orders</a></li>
                 <li><a href="#">Search</a></li>
             }
-            <li><a href="#">About us</a></li>
+            <li>@Html.ActionLink("About Us", "AboutUs", "Home", null, null)</li>
         </ul>
     </div>
     <div class="container body-content">
