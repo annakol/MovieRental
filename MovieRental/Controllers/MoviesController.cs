@@ -15,19 +15,31 @@ namespace MovieRental.Controllers
     {
         private MovieDBContext db = new MovieDBContext();
 
-        public ActionResult Index(int? genre)
+        public ActionResult Index(int? genre,string title,string director,int? price)
         {
-            if (genre == null)
-            {
                 var movies = db.Movies.Include(m => m.Genre);
-                return View(movies.ToList());
-            }
-            else
+
+            if (genre != null)
             {
-                var movies = db.Movies.Where(m => m.GenreId == genre);
+                movies = movies.Where(m => m.GenreId == genre);
+            }
+            if (!String.IsNullOrEmpty(title))
+            {
+                movies = movies.Where(m => m.Title.Contains(title));
+            }
+            if (!String.IsNullOrEmpty(director))
+            {
+                movies = movies.Where(m => m.Director.Contains(director));
+            }
+            if (price != null)
+            {
+                movies = movies.Where(m => m.Price <= price);
+            }
+            //var genres = from g in db.Genres select g;
+            //ViewBag.GenreList = new SelectList(genres, "GenreId", "Name");
+
                 return View(movies.ToList());
             }
-        }
 
         // GET: Movies/Details/5
         public ActionResult Details(int? id)
@@ -47,6 +59,10 @@ namespace MovieRental.Controllers
         // GET: Movies/Create
         public ActionResult Create()
         {
+            if (!(Session["IsManagerLogged"] != null && Session["IsManagerLogged"].ToString().Equals(true.ToString())))
+            {
+                return RedirectToAction("Index");
+            }
             ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name");
             return View();
         }
@@ -80,6 +96,10 @@ namespace MovieRental.Controllers
         // GET: Movies/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (!(Session["IsManagerLogged"] != null && Session["IsManagerLogged"].ToString().Equals(true.ToString())))
+            {
+                return RedirectToAction("Index");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -100,7 +120,7 @@ namespace MovieRental.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "MovieId,Title,Description,GenreId,ReleaseDate,Director,Price,TrailerUrl,ArtUrl,ArtImage")] Movie movie)
         {
-            if (movie.ArtImage.ContentLength > 0)
+            if (movie.ArtImage != null && movie.ArtImage.ContentLength > 0)
             {
                 var fileName = Path.GetFileName(movie.ArtImage.FileName);
                 var path = Path.Combine(Server.MapPath("/uploads"), fileName);
@@ -121,6 +141,10 @@ namespace MovieRental.Controllers
         // GET: Movies/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (!(Session["IsManagerLogged"] != null && Session["IsManagerLogged"].ToString().Equals(true.ToString())))
+            {
+                return RedirectToAction("Index");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

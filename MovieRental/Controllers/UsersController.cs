@@ -17,13 +17,22 @@ namespace MovieRental.Controllers
         // GET: /Users/
         public ActionResult Index()
         {
+            if (!(Session["IsManagerLogged"] != null && Session["IsManagerLogged"].ToString().Equals(true.ToString())))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View(db.Users.ToList());
         }
 
         // GET: /Users/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            if (Session["LoggedUserId"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            int userId = Int32.Parse(Session["LoggedUserId"].ToString());
+            if (id == null || id != userId)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -61,6 +70,10 @@ namespace MovieRental.Controllers
         // GET: /Users/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (!(Session["IsManagerLogged"] != null && Session["IsManagerLogged"].ToString().Equals(true.ToString())))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -92,6 +105,10 @@ namespace MovieRental.Controllers
         // GET: /Users/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (!(Session["IsManagerLogged"] != null && Session["IsManagerLogged"].ToString().Equals(true.ToString())))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

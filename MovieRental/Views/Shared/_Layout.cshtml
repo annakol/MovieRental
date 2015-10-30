@@ -6,17 +6,48 @@
     <title>Rent A Movie</title>
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <script src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+        var canvas = document.getElementById("logo");
+        var ctx = canvas.getContext("2d");
+        ctx.rotate(0.05);
+        ctx.fillStyle = "rgb(13,64,169)";
+        ctx.fillRect(0, 0, 190, 100);
+
+        grd = ctx.createLinearGradient(0.000, 150.000, 300.000, 150.000);
+
+        // Add colors
+        grd.addColorStop(0.308, 'rgba(255, 255, 0, 1.000)');
+        grd.addColorStop(0.994, 'rgba(255, 255, 255, 1.000)');
+        ctx.strokeStyle = grd;
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(25, 10, 165, 80);
+
+        ctx.fillStyle = "rgb(255,255,255)";
+        ctx.beginPath();
+        ctx.arc(5, 50, 15, 0, Math.PI * 2, true);
+        ctx.fill();
+
+        ctx.font = "25px Comic Sans MS";
+        ctx.fillStyle = "rgb(243,222,62)";
+        ctx.fillText("Rent", 50, 45);
+        ctx.fillText("A Movie", 70, 75);
+    });
+    </script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
 <body>
+    <header>
     <div style="float: left;  left:70px; position:relative">
-        <img src="/Resources/logo.jpg" />
+            <canvas id="logo"></canvas>
     </div>
+    </header>
     <br />
     <br />
-    <div style="left: 70px; position: relative">
+    <br />
+    <nav>
         <ul class="nav nav-pills">
             <li>@Html.ActionLink("Home", "Index", "Home", null, null)</li>
             <li role="presentation" class="dropdown">
@@ -27,34 +58,37 @@
                     @{Html.RenderAction("GenreMenu", "Home");}
                 </ul>
             </li>
-            @if (Session["LogedUserId"] == null)
+            @if (Session["LoggedUserId"] == null)
             {
                 <li>@Html.ActionLink("Login", "Login", "Home", null, null)</li>
                 <li>@Html.ActionLink("Sign up", "Create", "Users", null, null)</li>
             }
-            else if (Session["IsManegerLoged"] == true.ToString())
+            else
             {
-
-                <li>@Html.ActionLink("My Profile", "Details", "Users", new { id = Session["LogedUserId"] }, null)</li>
+                if (Session["IsManagerLogged"] == true.ToString())
+            {
                 <li>@Html.ActionLink("Users", "Index", "Users", null, null)</li>
                 <li>@Html.ActionLink("Movies", "Index", "Movies", null, null)</li>
                 <li>@Html.ActionLink("Addresses", "Index", "Address", null, null)</li>
-                <li><a href="#">Borrows</a></li>
+
+                    <li>@Html.ActionLink("Orders", "Index", "Orders", null, null)</li>
             }
-            else
-            {
-                <li><a href="#">My Orders</a></li>
-                <li><a href="#">Search</a></li>
+                <li>@Html.ActionLink("My Profile", "Details", "Users", new { id = Session["LoggedUserId"] }, null)</li>
+                <li>@Html.ActionLink("My Orders", "Details", "Orders", null, null)</li>
+                <li>@Html.ActionLink("Log-out", "LogOut", "Home", null, null)</li>
             }
             <li>@Html.ActionLink("About Us", "AboutUs", "Home", null, null)</li>
         </ul>
-    </div>
-    <div class="container body-content">
+    </nav>
+
+    <article>
+        <section id="content" class="container body-content">
         @RenderBody()
+        </section>
+    </article>
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Noy Levy & Anna Kolesnikov</p>
+        &copy; @DateTime.Now.Year - Noy Levy & Anna Kolesnikov
         </footer>
-    </div>
 </body>
 </html>
