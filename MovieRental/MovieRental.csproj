@@ -145,6 +145,10 @@
     <Content Include="Resources\logo.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Resources\Boogaloo-Regular.otf" />
+    <Content Include="Resources\AlexBrush-Regular.ttf" />
+    <Content Include="Resources\CandelaBook.otf" />
+    <Content Include="Resources\black_jack.ttf" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
