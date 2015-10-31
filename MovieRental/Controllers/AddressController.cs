@@ -17,12 +17,20 @@ namespace MovieRental.Controllers
         // GET: /Address/
         public ActionResult Index()
         {
+            if (!(Session["IsManagerLogged"] != null && Session["IsManagerLogged"].ToString().Equals(true.ToString())))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View(db.Addresses.ToList());
         }
 
         // GET: /Address/Details/5
         public ActionResult Details(int? id)
         {
+            if (!(Session["IsManagerLogged"] != null && Session["IsManagerLogged"].ToString().Equals(true.ToString())))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -38,6 +46,10 @@ namespace MovieRental.Controllers
         // GET: /Address/Create
         public ActionResult Create()
         {
+            if (!(Session["IsManagerLogged"] != null && Session["IsManagerLogged"].ToString().Equals(true.ToString())))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
@@ -61,6 +73,10 @@ namespace MovieRental.Controllers
         // GET: /Address/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (!(Session["IsManagerLogged"] != null && Session["IsManagerLogged"].ToString().Equals(true.ToString())))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -92,6 +108,10 @@ namespace MovieRental.Controllers
         // GET: /Address/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (!(Session["IsManagerLogged"] != null && Session["IsManagerLogged"].ToString().Equals(true.ToString())))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

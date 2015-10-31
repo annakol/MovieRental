@@ -94,7 +94,7 @@
                 <li class="pull-right">@Html.ActionLink("My Profile", "Details", "Users", new { id = Session["LoggedUserId"] }, null)</li>
                 <li class="pull-right">@Html.ActionLink("My Orders", "Details", "Orders", null, null)</li>
             }
-            <li><a href="#">About us</a></li>
+            <li>@Html.ActionLink("About Us", "AboutUs", "Home", null, null)</li>
         </ul>
     </nav>
 
