@@ -17,7 +17,7 @@ namespace MovieRental.Controllers
 
         public ActionResult Index(int? genre,string title,string director,int? price)
         {
-            var movies = db.Movies.Include(m => m.Genre);
+                var movies = db.Movies.Include(m => m.Genre);
 
             if (genre != null)
             {
@@ -36,8 +36,8 @@ namespace MovieRental.Controllers
                 movies = movies.Where(m => m.Price <= price);
             }
 
-            return View(movies.ToList());
-        }
+                return View(movies.ToList());
+            }
 
         // GET: Movies/Details/5
         public ActionResult Details(int? id)
