@@ -8,6 +8,15 @@
     <title>Index</title>
 </head>
 <body>
+    @using (Html.BeginForm())
+    {
+        <p>
+            Find by title: @Html.TextBox("title")
+            username: @Html.TextBox("username")
+            not returned: @Html.CheckBox("notReturned",false)
+            <input type="submit" class="btn btn-primary btn-sm" value="Search" />
+        </p>
+    }
     <table class="table">
         <tr>
             <th>

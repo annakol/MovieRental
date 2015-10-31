@@ -35,8 +35,6 @@ namespace MovieRental.Controllers
             {
                 movies = movies.Where(m => m.Price <= price);
             }
-            //var genres = from g in db.Genres select g;
-            //ViewBag.GenreList = new SelectList(genres, "GenreId", "Name");
 
             return View(movies.ToList());
         }

@@ -11,24 +11,42 @@
     $(document).ready(function () {
         var canvas = document.getElementById("logo");
         var ctx = canvas.getContext("2d");
+
         ctx.rotate(0.05);
+
+        // Create blue rect
+        ctx.save();
         ctx.fillStyle = "rgb(13,64,169)";
+        ctx.shadowColor = '#999';
+        ctx.shadowBlur = 15;
+        ctx.shadowOffsetX = 5;
+        ctx.shadowOffsetY = 5;
         ctx.fillRect(0, 0, 190, 100);
+        ctx.restore();
 
+        // Create yellow outline
         grd = ctx.createLinearGradient(0.000, 150.000, 300.000, 150.000);
-
-        // Add colors
-        grd.addColorStop(0.308, 'rgba(255, 255, 0, 1.000)');
-        grd.addColorStop(0.994, 'rgba(255, 255, 255, 1.000)');
+        grd.addColorStop(0.4, 'rgba(255, 255, 0, 1.000)');
+        grd.addColorStop(0.8, 'rgba(255, 255, 255, 1.000)');
         ctx.strokeStyle = grd;
         ctx.lineWidth = 1.5;
         ctx.strokeRect(25, 10, 165, 80);
 
+        // Blue line to cover one of the outline sides
+        ctx.strokeStyle = "rgb(13,64,169)";
+        ctx.beginPath();
+        ctx.lineWidth = 2;
+        ctx.moveTo(190, 0);
+        ctx.lineTo(190, 100);
+        ctx.stroke();
+
+        // White circle
         ctx.fillStyle = "rgb(255,255,255)";
         ctx.beginPath();
         ctx.arc(5, 50, 15, 0, Math.PI * 2, true);
         ctx.fill();
 
+        // Font
         ctx.font = "25px Comic Sans MS";
         ctx.fillStyle = "rgb(243,222,62)";
         ctx.fillText("Rent", 50, 45);
@@ -49,6 +67,7 @@
     <br />
     <nav>
         <ul class="nav nav-pills">
+            <li class="pull-right" style="width:50px">&nbsp;</li>
             <li>@Html.ActionLink("Home", "Index", "Home", null, null)</li>
             <li role="presentation" class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
@@ -60,8 +79,8 @@
             </li>
             @if (Session["LoggedUserId"] == null)
             {
-                <li>@Html.ActionLink("Login", "Login", "Home", null, null)</li>
-                <li>@Html.ActionLink("Sign up", "Create", "Users", null, null)</li>
+                <li class="pull-right">@Html.ActionLink("Sign up", "Create", "Users", null, null)</li>
+                <li class="active pull-right">@Html.ActionLink("Login", "Login", "Home", null, null)</li>
             }
             else
             {
@@ -70,9 +89,9 @@
                     <li>@Html.ActionLink("Users", "Index", "Users", null, null)</li>
                     <li>@Html.ActionLink("Orders", "Index", "Orders", null, null)</li>
                 }
-                <li>@Html.ActionLink("My Profile", "Details", "Users", new { id = Session["LoggedUserId"] }, null)</li>
-                <li>@Html.ActionLink("My Orders", "Details", "Orders", null, null)</li>
-                <li>@Html.ActionLink("Log-out", "LogOut", "Home", null, null)</li>
+                <li class="active pull-right">@Html.ActionLink("Log-out", "LogOut", "Home", null, null)</li>
+                <li class="pull-right">@Html.ActionLink("My Profile", "Details", "Users", new { id = Session["LoggedUserId"] }, null)</li>
+                <li class="pull-right">@Html.ActionLink("My Orders", "Details", "Orders", null, null)</li>
             }
             <li><a href="#">About us</a></li>
         </ul>

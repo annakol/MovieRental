@@ -15,13 +15,29 @@ namespace MovieRental.Controllers
         private MovieDBContext db = new MovieDBContext();
 
         // GET: /Users/
-        public ActionResult Index()
+        public ActionResult Index(string username,string email,int? month)
         {
             if (!(Session["IsManagerLogged"] != null && Session["IsManagerLogged"].ToString().Equals(true.ToString())))
             {
                 return RedirectToAction("Index", "Home");
             }
-            return View(db.Users.ToList());
+
+            var users = db.Users.AsQueryable();
+
+            if (!String.IsNullOrEmpty(username))
+            {
+                users = users.Where(u => u.Username.Contains(username));
+            }
+            if (!String.IsNullOrEmpty(email))
+            {
+                users = users.Where(u => u.Email.Contains(email));
+            }
+            if (month != null && month > 0)
+            {
+                users = users.Where(u => u.BirthDate.Month == month);
+            }
+
+            return View(users.ToList());
         }
 
         // GET: /Users/Details/5

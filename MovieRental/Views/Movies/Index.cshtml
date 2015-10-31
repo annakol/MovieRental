@@ -20,7 +20,7 @@
             Find by title: @Html.TextBox("title")
             director: @Html.TextBox("director")
             max price: @Html.TextBox("price",100,new { type="number", min="0", max="100" }) 
-            <input type="submit" value="Search" />
+            <input type="submit" class="btn btn-primary btn-sm" value="Search" />
         </p>
     }
     <table class="table">
@@ -68,8 +68,8 @@
                         @Html.ActionLink("Delete", "Delete", new { id = item.MovieId }) |
                     </span>
                 }
-                @Html.ActionLink("Details", "Details", new { id=item.MovieId }) 
-                @Html.ActionLink("Order", "Create", "Orders", new { id = item.MovieId },null)
+                @Html.ActionLink("Details", "Details", new { id=item.MovieId }) |
+                @Html.ActionLink("Order", "Create", "Orders", new { id = item.MovieId }, new { @class = "btn btn-success btn-sm" })
                 
             </td>
         </tr>

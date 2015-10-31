@@ -21,3 +21,61 @@ header, footer, aside, nav, article {
     display: block;
 }
 
+th {
+    text-shadow: -5px 5px 5px rgba(0,0,0,0.3);
+     font-family:navFont;
+     font-size:17px;
+}
+
+.rotatepic {
+    width: 100px;
+    height: 100px;
+    -webkit-transition: width 2s, height 2s, -webkit-transform 2s; /* Safari */
+    transition: width 2s, height 2s, transform 2s;
+}
+
+.rotatepic:hover {
+    width: 300px;
+    height: 300px;
+    -webkit-transform: rotate(180deg); /* Safari */
+    transform: rotate(180deg);
+}
+
+
+@font-face {
+  font-family: navFont;
+  src: url("/Resources/black_jack.ttf") format("opentype");
+}
+@font-face {
+  font-family: footerFont;
+  src: url("/Resources/AlexBrush-Regular.ttf") format("opentype");
+}
+@font-face {
+  font-family: sectionFont;
+  src: url("/Resources/CandelaBook.otf") format("opentype");
+}
+@font-face {
+  font-family: a;
+  src: url("/Resources/Boogaloo-Regular.otf") format("opentype");
+}
+nav {
+    font-family:a;
+    font-size:23px;
+    
+}
+
+section {
+    font-family:sectionFont;
+}
+
+footer {
+     font-family:footerFont;
+     padding-left:2em;
+     font-size:20px;
+}
+
+.border {
+  border-radius: 10px;
+  border: 3px solid #555FDA;
+}
+

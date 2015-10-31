@@ -1,12 +1,5 @@
 ﻿@model IEnumerable<MovieRental.Models.User>
 
-@{
-    ViewBag.Title = "Index";
-}
-
-<h2>Index</h2>
-
-
 <!DOCTYPE html>
 
 <html>
@@ -18,6 +11,15 @@
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
+    @using (Html.BeginForm())
+    {
+        <p>
+            Find by username: @Html.TextBox("username")
+            email: @Html.TextBox("email")
+            birthmonth: @Html.TextBox("month", 0, new { type = "number", min = "0", max = "12" })
+            <input type="submit" class="btn btn-primary btn-sm" value="Search" />
+        </p>
+    }
     <table class="table">
         <tr>
             <th>
