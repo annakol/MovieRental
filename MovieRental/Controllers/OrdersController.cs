@@ -88,7 +88,7 @@ namespace MovieRental.Controllers
                 return HttpNotFound();
             }
 
-            return View(movie);
+            return PartialView(movie);
         }
 
         // POST: Orders/Create

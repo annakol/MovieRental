@@ -5,24 +5,40 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Create</title>
+        <script type="text/javascript" src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/movies/Utils.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function ()
+        {
+            var id = @Html.Raw(Json.Encode(Model.MovieId))
+
+            $("#back").click(function ()
+            {
+                $("#orderDiv").hide();
+            });
+
+            $("#order").click(function ()
+            {
+                $("#orderDiv").hide();
+            });
+        });
+    </script>
 </head>
 <body>
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-    
-    <div>
-        Are you sure you want to order @Html.DisplayFor(model => model.Title) for @Html.DisplayFor(model => model.Price)?
-    </div>
-
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-        @Html.HiddenFor(model => model.MovieId)
-        <div class="form-actions no-color">
-            <input type="submit" value="Order" class="btn btn-default" /> |
-            @Html.ActionLink("Back to Movies", "Index", "Movies")
+    <div class="question-div">
+        <h3>Are you sure you want to order @Html.DisplayFor(model => model.Title) for @Html.DisplayFor(model => model.Price)?</h3>
+        <div>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.MovieId)
+                <div>
+                    <input id="order" type="submit" value="Order" class="btn btn-default" /> |
+                    <input id="back" type="button" value="Back to List" class="btn btn-default" />
+                </div>
+            }
         </div>
-    }
+    </div>
 </body>
 </html>

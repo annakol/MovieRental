@@ -23,7 +23,7 @@ header, footer, aside, nav, article {
 
 th {
     text-shadow: -5px 5px 5px rgba(0,0,0,0.3);
-     font-family:navFont;
+     font-family:thFont;
      font-size:17px;
 }
 
@@ -43,7 +43,7 @@ th {
 
 
 @font-face {
-  font-family: navFont;
+  font-family: thFont;
   src: url("/Resources/black_jack.ttf") format("opentype");
 }
 @font-face {
@@ -55,11 +55,11 @@ th {
   src: url("/Resources/CandelaBook.otf") format("opentype");
 }
 @font-face {
-  font-family: a;
+  font-family: navFont;
   src: url("/Resources/Boogaloo-Regular.otf") format("opentype");
 }
 nav {
-    font-family:a;
+    font-family:navFont;
     font-size:23px;
     
 }
@@ -74,8 +74,18 @@ footer {
      font-size:20px;
 }
 
-.border {
-  border-radius: 10px;
-  border: 3px solid #555FDA;
+.no-close-dialog .ui-dialog-titlebar-close {
+    display: none ;
 }
 
+.question-div {
+    border-radius: 10px;
+    border: 3px solid #555FDA;
+    background-color:white;
+    align-content:center;
+    align-items:center;
+    text-align:center;
+    height:150px;
+    width:300px;
+    font-family: sectionFont;
+}

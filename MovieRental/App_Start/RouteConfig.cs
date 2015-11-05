@@ -24,6 +24,10 @@ namespace MovieRental
                              new { controller = "Order", action = "Delete" },
                              new[] { "MovieRental.Controllers" });
 
+            routes.MapRoute("OrderMovie",
+                "Orders/Create/",
+                 new { controller = "Order", action = "Create" },
+                 new[] { "MovieRental.Controllers" });
         }
     }
 }

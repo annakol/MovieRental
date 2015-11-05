@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width" />
     <title>Return</title>
     <script type="text/javascript" src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/movies/Utils.js"></script>
     <script type="text/javascript">
 
         $(document).ready(function ()
@@ -46,11 +48,13 @@
         });
 </script>
 </head>
-<body>
-    <h3>Are you sure you want to return @Model.Movie.Title?</h3>
-    <div class="form-actions no-color">
-        <input id="returnSub" type="submit" value="Return" class="btn btn-default" /> |
-        <input id="back" type="button" value="Back to List" class="btn btn-default" />
+<body >
+    <div class="question-div">
+        <h3>Are you sure you want to return @Model.Movie.Title?</h3>
+        <div>
+            <input id="returnSub" type="submit" value="Return" class="btn btn-default" /> |
+            <input id="back" type="button" value="Back to List" class="btn btn-default" />
+        </div>
     </div>
 </body>
 </html>

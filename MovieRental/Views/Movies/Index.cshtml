@@ -6,6 +6,35 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
+    <script type="text/javascript" src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function ()
+        {
+            $("button").click(function ()
+            {
+                var id = $(this).attr('name');
+                var orderDiv = $("#orderDiv");
+                $.ajax({
+                    cache: false,
+                    type: "GET",
+                    url: "@(Url.RouteUrl("OrderMovie"))",
+                    data: { "id": id },
+                success: function (data)
+                {
+                    orderDiv.html('');
+                    orderDiv.html(data);
+                    orderDiv.show();
+                    orderDiv.dialog(({ dialogClass: 'no-close-dialog' }));
+                },
+                error: function (xhr, ajaxOptions, thrownError)
+                {
+                    alert(thrownError);
+                }
+            });
+        });
+        }); 
+    </script>
 </head>
 <body>
     @if (Session["IsManagerLogged"] == true.ToString())
@@ -19,7 +48,7 @@
         <p>
             Find by title: @Html.TextBox("title")
             director: @Html.TextBox("director")
-            max price: @Html.TextBox("price",100,new { type="number", min="0", max="100" }) 
+            max price: @Html.TextBox("price",100,new { type="number", min="0", max="100" })
             <input type="submit" class="btn btn-primary btn-sm" value="Search" />
         </p>
     }
@@ -42,7 +71,7 @@
             </th>
             <th></th>
         </tr>
-    
+
     @foreach (var item in Model) {
         <tr>
             <td>
@@ -69,12 +98,11 @@
                     </span>
                 }
                 @Html.ActionLink("Details", "Details", new { id=item.MovieId }) |
-                @Html.ActionLink("Order", "Create", "Orders", new { id = item.MovieId }, new { @class = "btn btn-success btn-sm" })
-                
+                <button class="btn btn-success btn-sm" name="@item.MovieId">Order</button>
             </td>
         </tr>
     }
-    
     </table>
+    <div id="orderDiv"></div>
 </body>
 </html>

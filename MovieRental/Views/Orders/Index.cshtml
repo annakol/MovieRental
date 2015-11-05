@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
     <script type="text/javascript" src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function ()
         {
@@ -24,6 +25,7 @@
                         deleteDiv.html('');
                         deleteDiv.html(data);
                         deleteDiv.show();
+                        deleteDiv.dialog(({ dialogClass: 'no-close-dialog' }));
                     },
                     error: function (xhr, ajaxOptions, thrownError)
                     {
