@@ -6,6 +6,33 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
+    <script type="text/javascript" src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function ()
+        {
+            $("button").click(function ()
+            {
+                var id = $(this).attr('name');
+                var deleteDiv = $("#deleteDiv");
+                $.ajax({
+                    cache: false,
+                    type: "GET",
+                    url: "@(Url.RouteUrl("ReturnOrder"))",
+                    data: { "id": id },
+                    success: function (data)
+                    {
+                        deleteDiv.html('');
+                        deleteDiv.html(data);
+                        deleteDiv.show();
+                    },
+                    error: function (xhr, ajaxOptions, thrownError)
+                    {
+                        alert('Failed to retrieve.');                    
+                    }
+                });
+            });
+        }); 
+    </script>
 </head>
 <body>
     @using (Html.BeginForm())
@@ -33,9 +60,10 @@
             </th>
             <th></th>
         </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
+
+    @foreach (var item in Model)
+    {
+        <tr id="@item.OrderId">
             <td>
                 @Html.DisplayFor(modelItem => item.Movie.Title)
             </td>
@@ -51,12 +79,13 @@
             <td>
                 @if (item.ReturnDate == null)
                 {
-                    @Html.ActionLink("Return", "Delete", new { id = item.OrderId })
+                    <button id="return" class="btn btn-warning btn-sm" name="@item.OrderId">Return</button>
                 }
             </td>
 
         </tr>
     }
     </table>
+    <div id="deleteDiv"></div>
 </body>
 </html>
