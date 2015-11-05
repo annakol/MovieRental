@@ -89,6 +89,12 @@
                     <li>@Html.ActionLink("Users", "Index", "Users", null, null)</li>
                     <li>@Html.ActionLink("Orders", "Index", "Orders", null, null)</li>
                     <li>@Html.ActionLink("Addresses", "Index", "Address", null, null)</li>
+                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reports<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Best genre", "Report", "Home", null, null)</li>
+                            <li>@Html.ActionLink("Best costumer", "Report", "Home", null, null)</li>
+                        </ul>
+                    </li>
                 }
                 <li class="active pull-right">@Html.ActionLink("Log-out", "LogOut", "Home", null, null)</li>
                 <li class="pull-right">@Html.ActionLink("My Profile", "Details", "Users", new { id = Session["LoggedUserId"] }, null)</li>

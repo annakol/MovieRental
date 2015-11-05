@@ -166,6 +166,25 @@ namespace MovieRental.Controllers
             return RedirectToAction("Index");
         }
 
+
+        public JsonResult GetMoviesGroupByGenre()
+        {
+            return (Json(getGendersGroup(), JsonRequestBehavior.AllowGet));
+        }
+
+         public IEnumerable<object> getGendersGroup()
+        {
+            var genre = from m in db.Movies
+                        group m by  m.Genre into grouping
+                        select new
+                        {
+                            GenreID = grouping.Key.GenreId,
+                            Name    = grouping.Key.Name,
+                            GenreCount = grouping.Count()
+                        };
+            return genre;
+         }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

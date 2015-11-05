@@ -32,9 +32,7 @@
             $.ajax({
                 url: "../Address/GetAddresses",
                 success: function (addresses) {
-                    debugger;
                     $.each(addresses, function (idx, obj) {
-                        debugger;
                         geocoder_map.geocode({ 'address': obj.AddressStore }, function (results, status) {
                             if (status == google.maps.GeocoderStatus.OK) {
                                 //add marker to the map
@@ -51,25 +49,7 @@
                     })
                 }
 
-            })
-
-            //loop through the addresses and add the resulting coordinates to an array
-            //for (var i = 0; i < address.length; i++) {
-                //geocoder_map.geocode({ 'address': "Tabenkin 20, Tel aviv" }, function (results, status) 
-                //{
-                //    if (status == google.maps.GeocoderStatus.OK) {
-                //        //add marker to the map
-                //        var marker = new google.maps.Marker({
-                //            map: map, position: results[0].geometry.location
-                //        });
-                //        markers.push(results[0].geometry.location);
-                //    }
-                //    else {
-                //        alert("Geocode for " + address + " was not successful for the following reason: " + status);
-                //    }
-                //});
-            //}
-            
+            })            
         }
         google.maps.event.addDomListener(window, 'load', initialize);
     </script>
@@ -77,5 +57,9 @@
 <body>
     <h2>AboutUs</h2>
     <div id="map"></div>
+
+    <h1>This is our store!</h1>
+    <h1>Here you can rent a movie and enjoy it :)</h1>
+    <h1>Hope to see you!</h1>
 </body>
 </html>

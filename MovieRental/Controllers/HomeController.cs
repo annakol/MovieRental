@@ -24,6 +24,12 @@ namespace MovieRental.Controllers
             return PartialView(genres);
         }
 
+        public ActionResult Report()
+        {
+            return View();
+        }
+
+
         [AllowAnonymous]
         public ActionResult Login()
         {

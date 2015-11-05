@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Report</h2>
+
+<html>
+    <head>
+        <script src="Scripts/jquery-2.1.4.js"
+                type="text/javascript"></script>
+        <script>
+            $.ajax({
+                url: "../Movies/GetMoviesGroupByGenre",
+                success: function (genres) {
+                    var trHTML = '';
+                    $.each(genres, function (i, obj) {
+                        trHTML += '<tr><td>' + obj.GenreID + '</td><td>' + obj.Name + '</td><td>' + obj.GenreCount + '</td></tr>';
+                    });
+                    debugger;
+                    $('#genres_body').append(trHTML);
+                }
+            });
+        </script>
+
+    </head>
+    <body>
+        <table id="genres_table" border="1">
+            <thead>
+                <tr>
+                    <th>GenreId</th>
+                    <th>Name</th>
+                    <th>GenreCount</th>
+                </tr>
+            </thead>
+            <tbody id="genres_body">
+
+            </tbody>
+        </table>
+        
+    </body>
+</html>
