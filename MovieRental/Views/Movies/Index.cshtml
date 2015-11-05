@@ -9,10 +9,11 @@
     <script type="text/javascript" src="~/Scripts/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
     <script type="text/javascript">
-        $(document).ready(function ()
-        {
-            $("button").click(function ()
-            {
+    $(document).ready(function () {
+        $("button").click(function () {
+            if ('@HttpContext.Current.Session["LoggedUserId"]' == "") {
+                window.location.href = "/Home/Login";
+            } else {
                 var id = $(this).attr('name');
                 var orderDiv = $("#orderDiv");
                 $.ajax({
@@ -20,21 +21,20 @@
                     type: "GET",
                     url: "@(Url.RouteUrl("OrderMovie"))",
                     data: { "id": id },
-                success: function (data)
-                {
-                    orderDiv.html('');
-                    orderDiv.html(data);
-                    orderDiv.show();
-                    orderDiv.dialog(({ dialogClass: 'no-close-dialog' }));
-                },
-                error: function (xhr, ajaxOptions, thrownError)
-                {
-                    alert(thrownError);
-                }
-            });
+                    success: function (data) {
+                        orderDiv.html('');
+                        orderDiv.html(data);
+                        orderDiv.show();
+                        orderDiv.dialog(({ dialogClass: 'no-close-dialog' }));
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert(thrownError);
+                    }
+                });
+            }
         });
-        }); 
-    </script>
+    });
+</script>
 </head>
 <body>
     @if (Session["IsManagerLogged"] == true.ToString())

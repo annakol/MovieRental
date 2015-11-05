@@ -12,6 +12,7 @@ namespace MovieRental.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
         [Required]
+        [Display(Name = "Address Store")]
         public string AddressStore { get; set; }
     }
 }

@@ -21,6 +21,7 @@ namespace MovieRental.Models
 
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        [Display(Name = "Release Date")]
         public DateTime ReleaseDate { get; set; }
 
         public string Director { get; set; }
@@ -29,13 +30,16 @@ namespace MovieRental.Models
         [DataType(DataType.Currency)]
         public decimal Price { get; set; }
 
+        [Display(Name = "Trailer")]
         public string TrailerUrl { get; set; }
 
         [DataType(DataType.ImageUrl)]
         [StringLength(1024)]
+        [Display(Name = "Art")]
         public string ArtUrl { get; set; }
 
         [NotMapped]
+        [Display(Name = "Art")]
         public HttpPostedFileBase ArtImage { get; set; }
         public virtual Genre Genre { get; set; }
     }

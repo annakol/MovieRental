@@ -12,10 +12,12 @@ namespace MovieRental.Models
         public int UserId { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        [Display(Name = "Order Date")]
         public DateTime OrderDate { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        [Display(Name = "Return Date")]
         public DateTime? ReturnDate { get; set; }
 
         public virtual User User { get; set; }
