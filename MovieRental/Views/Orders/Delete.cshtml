@@ -5,18 +5,52 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Delete</title>
+    <title>Return</title>
+    <script type="text/javascript" src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function ()
+        {
+            var id = @Html.Raw(Json.Encode(Model.OrderId))
+
+            $("#back").click(function ()
+            {
+                $("#deleteDiv").hide();
+            });
+
+            $("#returnSub").click(function ()
+            {
+                $.ajax({
+                    dataType: "json",
+                    url: "Orders/DeleteConfirmed",
+                    data: { "id": id },
+                    success: function (data)
+                    {
+                        var new_row =
+                            "<tr id='" + data.OrderId + "'>" +
+                            "<td>" + data.Movie.Title + "</td>" +
+                            "<td>" + data.User.Username + "</td>" +
+                            "<td>" + toJavaScriptDate(data.OrderDate) + "</td>" +
+                            "<td>" + toJavaScriptDate(data.ReturnDate) + "</td>" +
+                            "<td></td></tr>";
+                        
+                        $("tr#" + id).replaceWith(new_row);
+                        $("#deleteDiv").hide();
+                    },
+                    error: function (xhr, ajaxOptions, thrownError)
+                    {
+                        alert(thrownError);
+                    }
+                });
+            });
+        });
+</script>
 </head>
 <body>
-    <h3>Are you sure you want to return this movie?</h3>
-        @using (Html.BeginForm()) {
-            @Html.AntiForgeryToken()
-    
-            <div class="form-actions no-color">
-                <input type="submit" value="Return" class="btn btn-default" /> |
-                @Html.ActionLink("Back to List", "Index")
-            </div>
-        }
+    <h3>Are you sure you want to return @Model.Movie.Title?</h3>
+    <div class="form-actions no-color">
+        <input id="returnSub" type="submit" value="Return" class="btn btn-default" /> |
+        <input id="back" type="button" value="Back to List" class="btn btn-default" />
     </div>
 </body>
 </html>

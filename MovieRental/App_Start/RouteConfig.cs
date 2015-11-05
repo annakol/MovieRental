@@ -18,6 +18,12 @@ namespace MovieRental
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute("ReturnOrder",
+                            "Orders/Delete/",
+                             new { controller = "Order", action = "Delete" },
+                             new[] { "MovieRental.Controllers" });
+
         }
     }
 }
