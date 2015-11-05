@@ -32,9 +32,7 @@
             $.ajax({
                 url: "../Address/GetAddresses",
                 success: function (addresses) {
-                    debugger;
                     $.each(addresses, function (idx, obj) {
-                        debugger;
                         geocoder_map.geocode({ 'address': obj.AddressStore }, function (results, status) {
                             if (status == google.maps.GeocoderStatus.OK) {
                                 //add marker to the map
